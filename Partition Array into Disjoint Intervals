@@ -1,0 +1,23 @@
+class Solution {
+
+public:
+    int partitionDisjoint(vector<int>& A) {
+        
+        int maxCurrIndex = 0;   //  holds the index for current maximum num from left
+        int maxIndex = 0;       //  holds the index for maximum num upto i-th position
+        int endIndex = 0;       //  possible partition index
+        int N = A.size();
+        
+        for(int i=1; i<N; i++){
+            
+            if(A[i] < A[maxCurrIndex]) {
+                maxCurrIndex = maxIndex;
+                endIndex = i;
+            }
+            else if(A[i] > A[maxIndex]) maxIndex = i;
+                            
+        }
+        
+        return endIndex+1;
+    }
+};
