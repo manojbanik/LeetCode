@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+    //  The technique is to place each number on its desired position,
+    //  say, num[i] = x, then place x to num[x-1] position.
+    //  When we done, return the first unmatched position.
+        
+        int n = nums.size();
+        
+        for(int i=0; i<n; ) {            
+            int curElement = nums[i];
+            
+            if((curElement == i+1) || (curElement <= 0) || (curElement > n)) {                
+                i++;
+                continue;  //  inplace, or out-of-index
+            }
+            
+            swap(nums[i], nums[curElement-1]);
+            
+            if(nums[i] == nums[curElement-1]) i++;
+        }
+        
+        for(int i=0; i<n; i++) if(nums[i] != i+1) return i+1;
+        
+        return n+1;        
+    }
+};
